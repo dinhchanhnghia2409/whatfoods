@@ -4,7 +4,7 @@ const port = 3000
 
 
 app.get('/',(req,res)=>{
-    res.send('My Api')
+    res.send('What Food')
 })
 
 app.listen(process.env.PORT,()=>{
