@@ -13,34 +13,40 @@ Lấy từ body(dạng json) gửi đến serve
 Thành công dữ liệu sẽ lưu vào DB
 ===================================*/
 router.post('/signup', (req, res) => {
-  const { phone, email, password,name } = req.body
+    const { name, email, password, avatar, phone } = req.body
+    if (!email || !password || !name) {
+        return res.status(422).json({ error: "Chưa điền đầy đủ thông tin!" })
+    }
+    User.findOne({ phone: phone }) // compare phone registration with phone saved in database
+        .then((savedUser) => {
+            //if phone saved in database
+            if (savedUser) {
+                return res.status(422).json({ error: "Tài khoản này đã tồn tại!" })
+            }
+            //if phone not in database yet
+            bcrypt.hash(password, 12)
+                .then(hashedpassword => {
+                    const user = new User({
+                        email,
+                        phone,
+                        password: hashedpassword,
+                        name,
+                        avatar,
+                    })
+                    //save all informtion to database
+                    user.save()
+                        .then(user => {
+                            res.json({ message: "Đăng ký thành công" })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
+                })
 
-  User.findOne({ phone:phone })
-      .then((savedUser) => {
-          if (savedUser) {
-              return res.status(422).json({ error: "Tài khoản này đã tồn tại!" })
-          }
-          bcrypt.hash(password, 12)
-              .then(hashedpassword => {
-                  const user = new User({
-                      email,
-                      password: hashedpassword,
-                      phone,
-                      name,
-                  })
-                  user.save()
-                      .then( 
-                          res.json({ message: "Đăng ký thành công" })
-                      )
-                      .catch(err => {
-                          console.log(err)
-                      })
-              })
-
-      })
-      .catch(err => {
-          console.log(err)
-      })
+        })
+        .catch(err => {
+            console.log(err)
+        })
 })
 
   /*===================================
