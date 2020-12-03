@@ -9,7 +9,12 @@ password : bắt buộc
 email : bắt buộc , không trùng
 ===========================================*/
 const User = Schema({
-  username: {
+  email: {
+    type: String,
+    required: true,
+    unique:true
+  },
+  phone: {
     type: String,
     required: true,
     unique: true,
@@ -18,11 +23,7 @@ const User = Schema({
     type: String,
     required: true,
   },
-  email: {
-    type: String,
-    required: true,
-    unique:true
-  },
+ 
 });
 
 module.exports = mongoose.model("User", User);

@@ -13,9 +13,9 @@ Lấy từ body(dạng json) gửi đến serve
 Thành công dữ liệu sẽ lưu vào DB
 ===================================*/
 router.post('/signup', (req, res) => {
-  const { username, email, password, } = req.body
+  const { phone, email, password, } = req.body
 
-  User.findOne({ username:username })
+  User.findOne({ phone:phone })
       .then((savedUser) => {
           if (savedUser) {
               return res.status(422).json({ error: "Tài khoản này đã tồn tại!" })
@@ -25,7 +25,7 @@ router.post('/signup', (req, res) => {
                   const user = new User({
                       email,
                       password: hashedpassword,
-                      username,
+                      phone,
                   })
                   user.save()
                       .then( 
@@ -44,12 +44,12 @@ router.post('/signup', (req, res) => {
 
   /*===================================
   Chức năng đăng nhập
-  So sánh username và password từ body gửi đến serve
+  So sánh phone và password từ body gửi đến serve
   Thành công sẽ cung cấp Token 
   ===================================== */
   router.route("/signin").post((req, res) => {
-    const {username,password} = req.body
-    User.findOne({ username }, (err, result) => {
+    const {phone,password} = req.body
+    User.findOne({ phone }, (err, result) => {
       if (err) return res.status(500).json({ msg: err });
       if (result === null) {
         return res.status(403).json("Sai tài khoản");
