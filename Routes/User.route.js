@@ -45,26 +45,33 @@ router.post('/signup', (req, res) => {
 
   /*===================================
   Chức năng đăng nhập
-  So sánh phone và password từ body gửi đến serve
+  So sánh phone và password từ body gửi đến server
   Thành công sẽ cung cấp Token 
   ===================================== */
-  router.route("/signin").post((req, res) => {
-    const {phone,password} = req.body
-    User.findOne({ phone }, (err, result) => {
-      if (err) return res.status(500).json({ msg: err });
-      if (result === null) {
-        return res.status(403).json("Sai tài khoản");
-      }
-      if ( bcrypt.compare(password, result.password)) {
-        const token = jwt.sign({_id:result._id }, process.env.key, {expiresIn:'30d'});
-  
-        res.json({
-          token: token,
-        });
-      } else {
-        res.status(403).json("sai mật khẩu");
-      }
-    });
-  });
+  router.post('/signin', (req, res) => {
+    const { phone, password } = req.body
+    if (!phone || !password) {
+        return res.status(422).json({ error: "Hãy điền đầy đủ thông tin" })
+    }
+    User.findOne({ phone: phone }) //compare phone client input with phone in database
+        .then(savedUser => {
+            if (!savedUser) {
+                return res.status(422).json({ error: "Sai tài khoản" })
+            }
+            bcrypt.compare(password, savedUser.password) //compare password user input with password user registered
+                .then(doMatch => {
+                    //if successed send to token to authenticate
+                    if (doMatch) {
+                        const token = jwt.sign({ _id: savedUser._id }, process.env.JWT_KEY,{expiresIn:'30d'}) //token exits in 30 day
+                        res.json({ token});
+                    } else {
+                        return res.status(422).json({ error: "Sai mật khẩu" })
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        })
+})
 
   module.exports = router;
