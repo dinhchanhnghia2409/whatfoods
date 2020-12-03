@@ -7,6 +7,10 @@ app.get('/',(req,res)=>{
     res.send('What Food')
 })
 
+app.get('/user',(req,res)=>{
+    res.send('User')
+})
+
 app.listen(process.env.PORT,()=>{
 
 });
