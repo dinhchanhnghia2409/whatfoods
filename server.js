@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 require('dotenv').config()
 const PORT = process.env.PORT || 3000;
-require('./middleware/checkToken')
+require('./middleware/requireLogin')
 
 const UserRouter = require('./Routes/User.route')
 const ProfileRouter = require('./Routes/Profile.route')
