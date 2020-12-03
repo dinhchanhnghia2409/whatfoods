@@ -13,7 +13,7 @@ Lấy từ body(dạng json) gửi đến serve
 Thành công dữ liệu sẽ lưu vào DB
 ===================================*/
 router.post('/signup', (req, res) => {
-  const { phone, email, password, } = req.body
+  const { phone, email, password,name } = req.body
 
   User.findOne({ phone:phone })
       .then((savedUser) => {
@@ -26,6 +26,7 @@ router.post('/signup', (req, res) => {
                       email,
                       password: hashedpassword,
                       phone,
+                      name,
                   })
                   user.save()
                       .then( 

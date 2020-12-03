@@ -23,7 +23,10 @@ const User = Schema({
     type: String,
     required: true,
   },
- 
+  name: {
+    type: String,
+    require: true,
+  }
 });
 
 module.exports = mongoose.model("User", User);
