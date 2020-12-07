@@ -1,16 +1,15 @@
 const express = require("express");
 const User = require("../models/User.model")
 require('dotenv').config()
-const requieLogin = require('../middleware/requireLogin');
-
+const requireLogin = require('../middleware/requireLogin');
 const router = express.Router();
 
 
-router.get('/user/me', requieLogin, (req, res) => {
+router.get('/user/me', requireLogin, (req, res) => {
   res.json(req.user)
 })
 
-router.get('/user/:id', requieLogin, (req, res) => {
+router.get('/user/:id', requireLogin, (req, res) => {
   User.findOne({ _id: req.params.id })
       .select("-password")
       .then(user => {
@@ -20,7 +19,7 @@ router.get('/user/:id', requieLogin, (req, res) => {
       })
 })
 
-router.put('/user/me/update', RequireLogin, (req, res) => {
+router.put('/user/me/update', requireLogin, (req, res) => {
   User.findByIdAndUpdate(
       req.user._id,
       {
