@@ -12,9 +12,9 @@ router.get('/user/me', requieLogin, (req, res) => {
 
 router.get('/user/:id', requieLogin, (req, res) => {
   User.findOne({ _id: req.params.id })
-      .select("username")
+      .select("-password")
       .then(user => {
-          res.json(user.username);
+          res.json(user);
       }).catch(err => {
           return res.status(404).json({ error: "Người dùng không tồn tại" })
       })
