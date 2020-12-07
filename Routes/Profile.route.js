@@ -27,7 +27,6 @@ router.put('/user/me/update', requireLogin, (req, res) => {
           { 
           name: req.body.name,
           email: req.body.email,
-          avatar: req.body.avatar,
           bio: req.body.bio
           } 
       },
