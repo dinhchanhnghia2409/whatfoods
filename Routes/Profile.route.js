@@ -20,4 +20,25 @@ router.get('/user/:id', requieLogin, (req, res) => {
       })
 })
 
+router.put('/user/me/update', RequireLogin, (req, res) => {
+  User.findByIdAndUpdate(
+      req.user._id,
+      {
+          $set: 
+          { 
+          name: req.body.name,
+          email: req.body.email,
+          avatar: req.body.avatar,
+          bio: req.body.bio
+          } 
+      },
+      { new: true },
+      (err, result) => {
+          if (err) {
+              return res.status(422).json({ error: "Không thể Edit" })
+          }
+          res.json(result)
+      })
+})
+
 module.exports = router;
