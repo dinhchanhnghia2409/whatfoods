@@ -6,6 +6,7 @@ require('./middleware/requireLogin')
 
 const UserRouter = require('./Routes/User.route')
 const ProfileRouter = require('./Routes/Profile.route')
+const PostRouter = require('./Routes/Post.route')
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,6 +16,7 @@ require('./database')
 
 app.use(UserRouter);
 app.use(ProfileRouter);
+app.use(PostRouter);
 
 app.listen(PORT, () => {
     console.log('Server is running in port:' + PORT);
