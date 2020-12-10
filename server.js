@@ -17,7 +17,7 @@ require('./database')
 app.use(UserRouter);
 app.use(ProfileRouter);
 app.use(PostRouter);
-app.use(PostRouter);
+app.use(ServerImage);
 
 app.listen(PORT, () => {
     console.log('Server is running in port:' + PORT);
