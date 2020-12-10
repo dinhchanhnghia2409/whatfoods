@@ -3,7 +3,7 @@ var express = require('express')
 var multer  = require('multer')
 const router = express.Router()
 var fs = require('fs');
-const RequireLogin = require('../middleware/RequireLogin')
+const RequireLogin = require('../middleware/requireLogin')
 require('dotenv').config()
 
 var app = express()

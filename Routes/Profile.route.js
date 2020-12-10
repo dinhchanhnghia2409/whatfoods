@@ -1,8 +1,9 @@
 const express = require("express");
+const router = express.Router();
 const User = require("../models/User.model")
 require('dotenv').config()
 const requireLogin = require('../middleware/requireLogin');
-const router = express.Router();
+
 
 
 router.get('/user/me', requireLogin, (req, res) => {
