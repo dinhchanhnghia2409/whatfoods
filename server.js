@@ -7,7 +7,7 @@ require('./middleware/requireLogin')
 const UserRouter = require('./Routes/User.route')
 const ProfileRouter = require('./Routes/Profile.route')
 const PostRouter = require('./Routes/Post.route')
-const ServerImage = require('./image_server/cloudinary')
+const ServerImage = require('./Routes/Image.route')
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
