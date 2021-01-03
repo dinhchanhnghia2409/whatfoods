@@ -24,4 +24,17 @@ router.post('/createpost',RequireLogin, (req, res) => {
         })
 })
 
+router.get('/allpost', RequireLogin, (req, res) => {
+    Post.find()
+        .populate("postedBy", "_id ")
+        .populate("comments.postedBy", "_id ")
+        .sort('-createdAt')
+        .then((posts) => {
+            res.json({ posts })
+        }).catch(err => {
+            console.log(err)
+        })
+
+})
+
 module.exports = router;
