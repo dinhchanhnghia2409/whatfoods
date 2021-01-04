@@ -37,16 +37,7 @@ router.get('/allpost', RequireLogin, (req, res) => {
 
 })
 
-router.get('/mypost', RequireLogin, (req, res) => {
-    Post.find({ postedBy: req.user._id })
-        .populate("PostedBy", "_id name")
-        .then(mypost => {
-            res.json({ mypost })
-        })
-        .catch(err => {
-            console.log(err)
-        })
-})
+
 
 
 
