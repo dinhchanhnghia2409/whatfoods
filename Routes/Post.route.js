@@ -37,7 +37,7 @@ router.get('/allpost', RequireLogin, (req, res) => {
 
 })
 
-router.get('/mypost',RequireLogin, (req, res) => {
+router.get('/mypost', RequireLogin, (req, res) => {
     Post.find({ postedBy: req.user._id })
         .populate("PostedBy", "_id name")
         .then(mypost => {
@@ -65,5 +65,6 @@ router.delete('/deletepost/:postId', RequireLogin, (req, res) => {
             }
         })
 })
+
 
 module.exports = router;
