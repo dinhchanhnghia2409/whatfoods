@@ -34,4 +34,32 @@ router.post('/uploadimage', async (req, res, next) => {
     })
 })
 
+app.post('/upload', (req, res, next) => {
+    const upload = multer({ storage }).single('image')
+    upload(req, res, function(err) {
+      if (err) {
+        return res.send(err)
+      }
+      console.log('file uploaded to server')
+      console.log(req.file)
+        
+      const path = req.file.path
+      const uniqueFilename = new Date().toISOString()
+  
+      cloudinary.uploader.upload(
+        path,
+        { public_id:uniqueFilename, tags: 'nghia' }, // directory and tags are optional
+        function(err, image) {
+          if (err) return res.send(err)
+          console.log('Hình lên rồi Nghĩa ơi')
+          // remove file from server
+          const fs = require('fs')
+          fs.unlinkSync(path)
+          // return image details
+          res.json(image)
+        }
+      )
+    })
+  })
+
 module.exports = router;
