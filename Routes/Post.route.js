@@ -27,7 +27,7 @@ router.post('/createpost',RequireLogin, (req, res) => {
 router.get('/allpost', RequireLogin, (req, res) => {
     Post.find()
         .populate("postedBy", "_id name")
-        .populate("comments.postedBy", "_id name")
+        .populate("comments.postedBy", "_id name avatar")
         .sort('-createdAt')
         .then((posts) => {
             res.json({ posts })
