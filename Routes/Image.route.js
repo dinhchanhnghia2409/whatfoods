@@ -34,7 +34,7 @@ router.post('/uploadimage', async (req, res, next) => {
     })
 })
 
-app.post('/upload', (req, res, next) => {
+router.post('/upload', (req, res, next) => {
     const upload = multer({ storage }).single('image')
     upload(req, res, function(err) {
       if (err) {
