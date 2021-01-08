@@ -11,7 +11,7 @@ var app = express()
 const storage = multer.diskStorage({})
 
 // This route will upload file to cloudinary
-router.post('/uploadimage',RequireLogin, async (req, res, next) => {
+router.post('/uploadimage', async (req, res, next) => {
     const upload = multer({ storage }).single('image')
     upload(req, res, function (err) {
         if (err) {
