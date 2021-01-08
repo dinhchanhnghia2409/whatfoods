@@ -67,7 +67,7 @@ router.delete('/deletepost/:postId', RequireLogin, (req, res) => {
         })
 })
 
-router.put('/like',requireLogin,(req,res)=>{
+router.put('/like',RequireLogin,(req,res)=>{
     Post.findByIdAndUpdate(req.body.postId,{
         $push:{likes:req.user._id}
     },{
