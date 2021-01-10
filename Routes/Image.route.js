@@ -35,6 +35,7 @@ router.post('/uploadimage', async (req, res, next) => {
 })
 
 //This route will upload file to cloudinary using base64
+// This route will upload file to cloudinary using base64
 router.post('/uploadimagebase64',RequireLogin, async (req, res, next) => {
     var dataURI = req.body.dataURI;
     console.log(dataURI)
@@ -42,6 +43,8 @@ router.post('/uploadimagebase64',RequireLogin, async (req, res, next) => {
 
     cloudinary.v2.uploader.upload(uploadStr,function(error, result)
     {console.log(error,result); 
+        console.log(result.url);
+        return res.status(200).send(result.url)
     });
 })
 
