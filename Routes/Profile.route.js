@@ -26,9 +26,10 @@ router.put('/user/me/update', requireLogin, (req, res) => {
       {
           $set: 
           { 
-          name: req.body.name,
-          email: req.body.email,
-          bio: req.body.bio
+            avatar: req.body.avatar,
+            name: req.body.name,
+            email: req.body.email,
+            bio: req.body.bio
           } 
       },
       { new: true },
@@ -40,22 +41,6 @@ router.put('/user/me/update', requireLogin, (req, res) => {
       })
 })
 
-router.put('/user/me/update/avatar', requireLogin, (req, res) => {
-    User.findByIdAndUpdate(
-        req.user._id,
-        {
-            $set: 
-            { 
-            avatar: req.body.avatar,
-            } 
-        },
-        { new: true },
-        (err, result) => {
-            if (err) {
-                return res.status(422).json({ error: "Không thể Edit" })
-            }
-            res.json(result)
-        })
-})
+
 
 module.exports = router;
