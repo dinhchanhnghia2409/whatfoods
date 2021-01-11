@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
     expiresToken: String,
     avatar: {
         type: String,
-        default: "https://res.cloudinary.com/cnq/image/upload/v1586197723/noimage_d4ipmd.png"
+        default: "https://res.cloudinary.com/dwbo0xln4/image/upload/v1610334844/ylksnbshtkijpacncink.png"
     },
 
     bio: {
