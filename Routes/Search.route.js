@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User.model');
 require('dotenv').config()
 
-router.get("/searchuser", async (req,res) => {
+router.post("/searchuser", async (req,res) => {
     var query = req.body.name;
     console.log(query);
     User.find({
@@ -11,7 +11,6 @@ router.get("/searchuser", async (req,res) => {
     }).then((users) => {res.json({users})});
     
 });
-
 
 
 
