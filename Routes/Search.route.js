@@ -19,7 +19,7 @@ router.post("/searchfood", async (req,res) => {
     console.log(query);
     Food.find({
         ingredient: {$regex: req.body.ingredient, $options: "i"},
-    }).then(() => {res.json({foods})});
+    }).then((foods) => {res.json({foods})});
     
 });
 
