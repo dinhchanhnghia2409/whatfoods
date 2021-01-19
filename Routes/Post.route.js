@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const RequireLogin = require('../middleware/requireLogin')
 const Post = require('../models/Post.model');
+const Food = require('../models/Food.model')
 require('dotenv').config()
 
 
@@ -11,7 +12,7 @@ router.post('/createpost',RequireLogin, (req, res) => {
     if (!caption || !photo) {
         return res.status(422).json({ error: "Hãy điền đầy đủ thông tin" })
     }
-    const post = new Post({
+    const food = new Food({
         photo,
         caption,
         postedBy: req.user
@@ -23,6 +24,31 @@ router.post('/createpost',RequireLogin, (req, res) => {
             console.log(err)
         })
 })
+
+
+
+router.post('/createfood',RequireLogin, (req, res) => {
+    const {name, image,ingredient,recipe,category} = req.body
+    if (!name || !image || !ingredient || !recipe || !category) {
+        return res.status(422).json({ error: "Hãy điền đầy đủ thông tin" })
+    }
+    const food = new Food({
+        name,
+        image,
+        ingredient,
+        recipe,
+        category,
+        postedBy: req.user
+    })
+    food.save().then(result => {
+            res.json({ food: result })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
+
+
 
 router.get('/allpost', RequireLogin, (req, res) => {
     Post.find()
