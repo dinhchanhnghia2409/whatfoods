@@ -12,7 +12,7 @@ router.post('/createpost',RequireLogin, (req, res) => {
     if (!caption || !photo) {
         return res.status(422).json({ error: "Hãy điền đầy đủ thông tin" })
     }
-    const food = new Food({
+    const post = new Post({
         photo,
         caption,
         postedBy: req.user
