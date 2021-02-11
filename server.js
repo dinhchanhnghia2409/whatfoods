@@ -10,6 +10,7 @@ const PostRouter = require('./Routes/Post.route')
 const ServerImage = require('./Routes/Image.route')
 const SearchRouter = require('./Routes/Search.route')
 const bodyParser = require('body-parser');
+const { patch } = require('./Routes/User.route');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -26,5 +27,5 @@ app.listen(PORT, () => {
 })
 
 app.get('/',(req,res)=>{
-    res.sendFile('index.html');
+    res.sendFile(path.join("index.html"));
 })
