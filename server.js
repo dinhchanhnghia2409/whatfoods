@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 require('dotenv').config()
+const path = require('path');
 const PORT = process.env.PORT || 3000;
 require('./middleware/requireLogin')
 
@@ -27,5 +28,5 @@ app.listen(PORT, () => {
 })
 
 app.get('/',(req,res)=>{
-    res.sendFile(path.join("index.html"));
+    res.sendFile(path.join('/index.html'));
 })
