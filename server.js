@@ -23,7 +23,9 @@ app.use(ProfileRouter);
 app.use(PostRouter);
 app.use(ServerImage);
 app.use(SearchRouter);
-app.set('views','./views');
+
+
+app.use(express.static('public'));
 
 
 app.listen(PORT, () => {
