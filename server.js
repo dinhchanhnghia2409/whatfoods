@@ -25,7 +25,7 @@ app.use(ServerImage);
 app.use(SearchRouter);
 
 
-app.use(express.static('public'));
+app.use('/public', express.static('public'))
 
 
 app.listen(PORT, () => {
