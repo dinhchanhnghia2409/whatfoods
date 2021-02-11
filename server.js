@@ -26,5 +26,5 @@ app.listen(PORT, () => {
 })
 
 app.get('/',(req,res)=>{
-    res.send('MyAPI say Hello')
+    res.sendFile('index.html');
 })
