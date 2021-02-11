@@ -4,6 +4,7 @@ require('dotenv').config()
 const path = require('path');
 const PORT = process.env.PORT || 3000;
 require('./middleware/requireLogin')
+app.use(express.static('/'))
 
 const UserRouter = require('./Routes/User.route')
 const ProfileRouter = require('./Routes/Profile.route')
@@ -28,5 +29,5 @@ app.listen(PORT, () => {
 })
 
 app.get('/',(req,res)=>{
-    res.sendFile(path.join(__dirname +'/' + 'index.html' + 'main.css'));
+   res.render('index')
 })
